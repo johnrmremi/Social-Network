@@ -21,6 +21,8 @@
             if (isset($_POST['follow'])) {
 
                 if ($userid != $followerid) {
+                    
+                    // The bug was at the line below
 
                     if (!DB::query('SELECT id FROM followers WHERE user_id=:userid AND follower_id=:followerid', array(':userid'=>$userid, ':followerid'=>$followerid))) {
 
@@ -43,7 +45,8 @@
             if (isset($_POST['unfollow'])) {
 
                 if ($userid != $followerid) {
-
+                    
+                    // The bug was at the line below
                     if (DB::query('SELECT id FROM followers WHERE user_id=:userid AND follower_id=:followerid', array(':userid'=>$userid, ':followerid'=>$followerid))) {
 
                         if ($followerid == 5) {
@@ -58,7 +61,9 @@
                 }      
 
             }
-
+            
+            
+            // The bug was at the line below
             if (DB::query('SELECT id FROM followers WHERE user_id=:userid AND follower_id=:followerid', array(':userid'=>$userid, ':followerid'=>$followerid))) {
                 
                 // echo "Already following!.";
